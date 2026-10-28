@@ -15,15 +15,17 @@ class Solution {
 
         for(int num : set){
 
-            if(!set.contains(num-1)){     
+            if(set.contains(num-1)){
+                continue;
+            }
                 int count = 1;       
                 int current = num;
-                while(set.contains(current+1)){
+                int nextValue = current+1;
+                while(set.contains(nextValue)){
                     count++;
-                    current++;
+                    nextValue++;
                 }
             longSeq = Math.max(longSeq,count);
-            }
 
         }
 
