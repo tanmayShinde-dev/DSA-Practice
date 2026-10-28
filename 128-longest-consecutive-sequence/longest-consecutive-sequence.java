@@ -6,23 +6,26 @@ class Solution {
             return 0;
         }
 
-        int longSeq = 1;
-        int count =1;
+        Set<Integer> set = new HashSet<>();
+        int longSeq = 0;
 
-        Arrays.sort(nums);      // [100,4,200,1,3,2] --> [1,2,3,4,100,200]
+        for(int num: nums){
+            set.add(num);        //[100,4,200,1,3,2]
+        }
 
-        for(int i=1; i<nums.length;i++){
+        for(int num : set){
 
-            if(nums[i] == nums[i-1]+1){
-                count++;
-                longSeq = Math.max(count, longSeq);
-
-            }else if(nums[i] == nums[i-1]){
-                count = count;
-            }else{
-                count=1;
+            if(!set.contains(num-1)){     
+                int count = 1;       
+                int current = num;
+                while(set.contains(current+1)){
+                    count++;
+                    current++;
+                }
+            longSeq = Math.max(longSeq,count);
             }
-        }    //0,1,1,2
+
+        }
 
         return longSeq;
 
