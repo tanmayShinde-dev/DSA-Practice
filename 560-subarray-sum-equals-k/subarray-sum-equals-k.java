@@ -1,20 +1,36 @@
 class Solution {
     public int subarraySum(int[] nums, int k) {
 
+        HashMap<Long, Integer> map = new HashMap<>();
+
         int n = nums.length;
-        int count = 0;
-        
-        for(int i = 0; i<n; i++){
-            int currSum = 0;
-            for(int j=i; j<n; j++){
-                currSum+=nums[j];
-                if(currSum==k){
-                    count++;
-                }
-            }
+        int subArrCount = 0;
+        long currSum = 0;
+
+        if(n==0){
+            return 0;
         }
 
-        return count;
+        map.put(0L, 1);
+
+        for(int i=0; i<n; i++){
+
+            currSum+=nums[i];
+            long required = currSum-k;
+
+            if(map.containsKey(required)){
+                subArrCount += map.get(required);
+            }
+
+            map.put(currSum, map.getOrDefault(currSum,0)+1);
+
+
+        }
+
+        
+        
+
+        return subArrCount;
         
     }
 }
